@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Verificando Dashboard...</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard CX - Atualizando</title>
   <style>
     body {
+      font-family: Roboto, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
       background-color: #2C3E50;
-      color: white;
-      font-family: 'Roboto', sans-serif;
+      color: #ECF0F1;
       text-align: center;
-      padding-top: 20vh;
     }
     .spinner {
-      margin-top: 40px;
-      border: 6px solid #f3f3f3;
-      border-top: 6px solid #3498db;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #3498db;
       border-radius: 50%;
-      width: 60px;
-      height: 60px;
+      width: 40px;
+      height: 40px;
       animation: spin 1s linear infinite;
-      margin-left: auto;
-      margin-right: auto;
+      margin-bottom: 20px;
     }
     @keyframes spin {
       0% { transform: rotate(0deg); }
@@ -29,28 +32,23 @@
   </style>
 </head>
 <body>
-  <h1>⏳ Carregando o Dashboard...</h1>
-  <p>Estamos verificando se o sistema já está disponível.</p>
   <div class="spinner"></div>
+  <h1>⏳ Atualizando o painel do CX</h1>
+  <p>Você será redirecionado automaticamente quando estiver disponível.</p>
 
   <script>
-    const destino = "https://dashboard-cx.onrender.com"; // URL real do dashboard
+    const urlDestino = "https://dashboard-cx.onrender.com"; //
 
-    async function verificarDisponibilidade() {
+    async function checarDisponibilidade() {
       try {
-        const response = await fetch(destino, { mode: "no-cors" });
-
-        // Se não der erro, tenta redirecionar
-        window.location.href = destino;
-      } catch (err) {
-        console.log("Ainda fora do ar...");
+        const res = await fetch(urlDestino, { mode: 'no-cors' });
+        window.location.href = urlDestino;
+      } catch (e) {
+        setTimeout(checarDisponibilidade, 3000);
       }
-
-      // Tenta novamente em 5 segundos
-      setTimeout(verificarDisponibilidade, 5000);
     }
 
-    verificarDisponibilidade();
+    setTimeout(checarDisponibilidade, 1000);
   </script>
 </body>
 </html>
